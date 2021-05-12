@@ -92,7 +92,7 @@ class SetPasswordField(PasswordField):
 class LoginForm(forms.Form):
 
     password = PasswordField(label=_("Password"), autocomplete="current-password")
-    remember = forms.BooleanField(label=_("Remember Me"), required=False)
+    remember = forms.BooleanField(label=_("Remember Me"), required=False, initial=True)
 
     user = None
     error_messages = {
