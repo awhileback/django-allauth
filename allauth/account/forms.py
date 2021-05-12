@@ -66,7 +66,10 @@ class PasswordField(forms.CharField):
         )
         kwargs["widget"] = forms.PasswordInput(
             render_value=render_value,
-            attrs={"placeholder": kwargs.get("label")},
+            attrs={
+                    "placeholder": kwargs.get("label"),
+                    "class": "form-control"
+                  },
         )
         autocomplete = kwargs.pop("autocomplete", None)
         if autocomplete is not None:
@@ -111,12 +114,19 @@ class LoginForm(forms.Form):
                     "type": "email",
                     "placeholder": _("E-mail address"),
                     "autocomplete": "email",
+                    "autofocus": "autofocus",
+                    "class": "form-control"
                 }
             )
             login_field = forms.EmailField(label=_("E-mail"), widget=login_widget)
         elif app_settings.AUTHENTICATION_METHOD == AuthenticationMethod.USERNAME:
             login_widget = forms.TextInput(
-                attrs={"placeholder": _("Username"), "autocomplete": "username"}
+                attrs={
+                        "placeholder": _("Username"), 
+                        "autocomplete": "username",
+                        "autofocus": "autofocus",
+                        "class": "form-control"
+                }
             )
             login_field = forms.CharField(
                 label=_("Username"),
@@ -129,7 +139,12 @@ class LoginForm(forms.Form):
                 == AuthenticationMethod.USERNAME_EMAIL
             )
             login_widget = forms.TextInput(
-                attrs={"placeholder": _("Username or e-mail"), "autocomplete": "email"}
+                attrs={
+                        "placeholder": _("Username or e-mail"), 
+                        "autocomplete": "email",
+                        "autofocus": "autofocus",
+                        "class": "form-control"
+                }
             )
             login_field = forms.CharField(
                 label=pgettext("field label", "Login"), widget=login_widget
@@ -268,7 +283,12 @@ class BaseSignupForm(_base_signup_form_class()):
         label=_("Username"),
         min_length=app_settings.USERNAME_MIN_LENGTH,
         widget=forms.TextInput(
-            attrs={"placeholder": _("Username"), "autocomplete": "username"}
+            attrs={
+                    "placeholder": _("Username"),
+                    "autocomplete": "username",
+                    "autofocus": "autofocus",
+                    "class": "form-control"
+            }
         ),
     )
     email = forms.EmailField(
@@ -277,6 +297,7 @@ class BaseSignupForm(_base_signup_form_class()):
                 "type": "email",
                 "placeholder": _("E-mail address"),
                 "autocomplete": "email",
+                "class": "form-control"
             }
         )
     )
@@ -308,6 +329,7 @@ class BaseSignupForm(_base_signup_form_class()):
                     attrs={
                         "type": "email",
                         "placeholder": _("E-mail address confirmation"),
+                        "class": "form-control"
                     }
                 ),
             )
@@ -435,7 +457,11 @@ class AddEmailForm(UserForm):
         label=_("E-mail"),
         required=True,
         widget=forms.TextInput(
-            attrs={"type": "email", "placeholder": _("E-mail address")}
+            attrs={
+                    "type": "email",
+                    "placeholder": _("E-mail address"),
+                    "class": "form-control"
+            }
         ),
     )
 
@@ -512,12 +538,13 @@ class ResetPasswordForm(forms.Form):
         required=True,
         widget=forms.TextInput(
             attrs={
-                "type": "email",
-                "placeholder": _("E-mail address"),
-                "autocomplete": "email",
-            }
-        ),
-    )
+                    "type": "email",
+                    "placeholder": _("E-mail address"),
+                    "autocomplete": "email",
+                    "class": "form-control"
+                }
+            ),
+        )
 
     def clean_email(self):
         email = self.cleaned_data["email"]
