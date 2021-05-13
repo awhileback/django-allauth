@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
         ('account', '0002_email_max_length'),
     ]
 
-operations = [
+    operations = [
         migrations.AlterField(
             model_name='emailaddress',
             name='user',
