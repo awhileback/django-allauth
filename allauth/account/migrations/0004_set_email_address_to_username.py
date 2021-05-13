@@ -4,11 +4,11 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-dependencies = [
+    dependencies = [
         ('account', '0003_set_email_address_to_username'),
     ]
 
-operations = [
+    operations = [
         migrations.AlterField(
             model_name='emailaddress',
             name='user',
